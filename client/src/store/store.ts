@@ -8,6 +8,7 @@ import { AuthResponse } from "../types/response/AuthResponse";
 export default class Store {
   user = {} as IUser;
   isAuth = false;
+  isLoading = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -19,6 +20,10 @@ export default class Store {
 
   setUser(user: IUser) {
     this.user = user;
+  }
+
+  setLoading(bool: boolean) {
+    this.isLoading = bool;
   }
 
   async login(email: string, password: string) {
@@ -57,6 +62,7 @@ export default class Store {
   }
 
   async checkAuth() {
+    this.setLoading(true);
     try {
       const response = await axios.get<AuthResponse>(
         `${process.env.REACT_APP_API_URL}/refresh`,
@@ -68,6 +74,8 @@ export default class Store {
       this.setUser(response.data.user);
     } catch (e: any) {
       console.log(e.response?.data?.message);
+    } finally {
+      this.setLoading(false);
     }
   }
 }
