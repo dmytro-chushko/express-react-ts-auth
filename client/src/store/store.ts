@@ -7,8 +7,8 @@ import { AuthResponse } from "../types/response/AuthResponse";
 
 export default class Store {
   user = {} as IUser;
-  isAuth = false;
-  isLoading = false;
+  isAuth: boolean = false;
+  isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);

@@ -39,16 +39,20 @@ function App() {
           ? `User authorized ${store.user.email}`
           : `Need to authorize`}
       </h1>
+      <h2>
+        {store.user.isActivated ? "Accaunt activated" : "Activate your account"}
+      </h2>
       <button onClick={() => store.logout()} type="button">
         Logout
       </button>
       <div>
-        <button onClick={getUsers} type="button"></button>
+        <button onClick={getUsers} type="button">
+          Get users
+        </button>
       </div>
       {users.map((user) => (
-        <div key={user.id}>{user.email}</div>
+        <div key={user._id}>{user.email}</div>
       ))}
-      ;
     </div>
   );
 }

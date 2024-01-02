@@ -8,6 +8,7 @@ export const LoginForm: FC = observer(() => {
   const { store } = useContext(Context);
 
   const handleLogin = () => store.login(email, password);
+
   const handleRegistration = () => store.registration(email, password);
 
   return (
